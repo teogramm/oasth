@@ -19,7 +19,7 @@ Features
 Usage
 ------------
 
-The library is available in Maven Central with artifact ID: ```xyz.teogramm:oasth```
+The library will soon be available in Maven Central with artifact ID: ```xyz.teogramm:oasth```
 
 Gradle Kotlin DSL Example:
 #### **build.gradle.kts**
