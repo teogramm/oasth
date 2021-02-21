@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "xyz.teogramm"
-version = "0.9"
+version = "0.9.0"
 
 repositories {
     mavenCentral()
