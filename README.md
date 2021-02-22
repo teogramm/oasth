@@ -14,7 +14,7 @@ Features
 --------
 
 - Get static data about the network. Routes, lines, stops and schedules.
-- TODO: Get live data about bus locations and arrival times.
+- Get live data about bus locations and arrival times.
 
 Usage
 ------------
@@ -35,7 +35,7 @@ dependencies {
 Documentation
 ----------
 
-TBD
+Documentation is available on [ReadTheDocs](https://oasth.readthedocs.io/).
 
 Contribute
 ----------
