@@ -1,7 +1,6 @@
 plugins {
     kotlin("jvm") version "1.4.30"
     id("org.jetbrains.dokka") version "1.4.20"
-    id("org.jlleitschuh.gradle.ktlint") version "10.0.0"
     `maven-publish`
 }
 
