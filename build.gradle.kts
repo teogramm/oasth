@@ -1,12 +1,25 @@
 import org.jetbrains.dokka.gradle.DokkaTask
 import java.time.Instant
 import java.net.URI
+import java.util.Properties
 
 plugins {
     kotlin("jvm") version "1.4.30"
     id("org.jetbrains.dokka") version "1.4.20"
     `maven-publish`
     signing
+}
+
+// Load properties from local.properties
+val propertiesFile = project.rootProject.file("local.properties")
+if(propertiesFile.exists()) {
+    val p = Properties()
+    propertiesFile.inputStream().use {
+        p.load(it)
+    }
+    p.forEach { name, value ->
+        extra[name.toString()] = value.toString()
+    }
 }
 
 group = "xyz.teogramm"
@@ -92,10 +105,11 @@ signing {
     setRequired({
         gradle.taskGraph.hasTask("publishReleasePublicationToMavenCentralRepository")
     })
-    // Signing key and passphrase set in environment variables
-    val signingKey: String? = System.getenv("GPG_SECRET")
-    val signingPassword: String? = System.getenv("GPG_PASSPHRASE")
-    useInMemoryPgpKeys(signingKey, signingPassword)
+    // Workaround Gradle issue https://github.com/gradle/gradle/issues/5064
+    // To enable signing set the "signing.gnupg.keyName" property
+    if(project.hasProperty("signing.gnupg.keyName")) {
+        useGpgCmd()
+    }
     sign(publishing.publications)
 }
 
