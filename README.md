@@ -5,7 +5,7 @@ This is a library for accessing the OASTH API.
 
 Example usage:
 
-    import org.teogramm.oasth
+    import xyz.teogramm.oasth
 
     val oasth = Oasth()
     val data = oasth.fetch()
