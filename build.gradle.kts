@@ -41,6 +41,7 @@ tasks {
         from("$buildDir/dokka/javadoc")
         dependsOn(dokkaJavadoc.path)
     }
+
     publishing {
         publications {
             create<MavenPublication>("release") {
@@ -85,17 +86,17 @@ tasks {
             }
         }
     }
+}
 
-    signing {
-        setRequired {
-           (gradle.taskGraph.hasTask("publish") || gradle.taskGraph.hasTask("publishPlugins"))
-        }
-        // Signing key and passphrase set in environment variables
-        val signingKey: String? = System.getenv("GPG_SECRET")
-        val signingPassword: String? = System.getenv("GPG_PASSPHRASE")
-        useInMemoryPgpKeys(signingKey, signingPassword)
-        sign(publishing.publications)
-    }
+signing {
+    setRequired({
+        gradle.taskGraph.hasTask("publishReleasePublicationToMavenCentralRepository")
+    })
+    // Signing key and passphrase set in environment variables
+    val signingKey: String? = System.getenv("GPG_SECRET")
+    val signingPassword: String? = System.getenv("GPG_PASSPHRASE")
+    useInMemoryPgpKeys(signingKey, signingPassword)
+    sign(publishing.publications)
 }
 
 sourceSets {
