@@ -58,6 +58,7 @@ class TextExporter {
             val writer = BufferedWriter(fstream)
 
             val csvHeader = "stopid,stopname,longitude,latitude"
+            writer.write(csvHeader)
             stops.forEach {
                 writer.write("${it.internalId},${it.nameEL},${it.longitude},${it.latitude},${System.lineSeparator()}")
             }
