@@ -4,8 +4,8 @@ import java.net.URI
 import java.util.Properties
 
 plugins {
-    kotlin("jvm") version "1.4.30"
-    id("org.jetbrains.dokka") version "1.4.20"
+    kotlin("jvm") version "1.6.21"
+    id("org.jetbrains.dokka") version "1.6.21"
     `maven-publish`
     signing
 }
@@ -23,7 +23,7 @@ if(propertiesFile.exists()) {
 }
 
 group = "xyz.teogramm"
-version = "0.9.0"
+version = "0.10.0"
 
 repositories {
     mavenCentral()
@@ -122,5 +122,5 @@ sourceSets {
 
 dependencies {
     implementation(kotlin("stdlib"))
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1")
 }
