@@ -5,7 +5,7 @@ This is a library for accessing the OASTH API.
 
 Example usage:
 
-    import xyz.teogramm.oasth
+    import xyz.teogramm.oasth.Oasth
 
     val oasth = Oasth()
     val data = oasth.fetch()
@@ -28,7 +28,7 @@ repositories {
     mavenCentral()
 }
 dependencies {
-    implementation("xyz.teogramm:oasth")
+    implementation("xyz.teogramm:oasth:0.9.0")
 }
 ```
 
