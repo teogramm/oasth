@@ -1,3 +1,5 @@
+# NOTICE: After changes to the API, this library is no longer working. Currently, there are no plans to update it.
+
 oasth
 ========
 
