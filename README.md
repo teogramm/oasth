@@ -1,5 +1,3 @@
-# NOTICE: After changes to the API, this library is no longer working. Currently, there are no plans to update it.
-
 oasth
 ========
 
@@ -48,4 +46,4 @@ Bug reports and pull requests are welcome!
 License
 -------
 
-The project is licensed under the GPLv3 license.
+The project is licensed under the GPLv3 licence.
