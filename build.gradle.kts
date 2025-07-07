@@ -1,11 +1,10 @@
-import org.jetbrains.dokka.gradle.DokkaTask
 import java.time.Instant
 import java.net.URI
 import java.util.Properties
 
 plugins {
-    kotlin("jvm") version "1.4.30"
-    id("org.jetbrains.dokka") version "1.4.20"
+    kotlin("jvm") version "2.1.10"
+    id("org.jetbrains.dokka") version "2.0.0"
     `maven-publish`
     signing
 }
@@ -23,11 +22,10 @@ if(propertiesFile.exists()) {
 }
 
 group = "xyz.teogramm"
-version = "0.9.0"
+version = "0.10.0"
 
 repositories {
     mavenCentral()
-    jcenter()
 }
 
 val jarComponent: SoftwareComponent = components["kotlin"]
@@ -44,15 +42,17 @@ tasks {
             attributes["Implementation-Version"] = project.version
         }
     }
-    val sourcesJar by registering(Jar::class) {
+
+
+    val sourcesJar = register<Jar>("sourcesJar") {
         archiveClassifier.set("sources")
         from(sourceSets.main.get().allSource)
     }
-    val dokkaJavadoc by getting(DokkaTask::class)
-    val javadocJar by registering(Jar::class) {
+
+    val javadocJar = register<Jar>("javadocJar") {
+        dependsOn(dokkaGeneratePublicationHtml)
+        from(dokkaGeneratePublicationHtml.flatMap { it.outputDirectory })
         archiveClassifier.set("javadoc")
-        from("$buildDir/dokka/javadoc")
-        dependsOn(dokkaJavadoc.path)
     }
 
     publishing {
@@ -91,7 +91,7 @@ tasks {
         repositories {
             maven {
                 name = "mavenCentral"
-                url = URI("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
+                url = URI("https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/")
                 credentials {
                     username = System.getenv("SONATYPE_USERNAME")
                     password = System.getenv("SONATYPE_PASSWORD")
@@ -114,6 +114,7 @@ signing {
 }
 
 sourceSets {
+    // Add main sources to the debug source set
     create("debug") {
         compileClasspath += sourceSets.main.get().runtimeClasspath
         runtimeClasspath += sourceSets.main.get().runtimeClasspath
