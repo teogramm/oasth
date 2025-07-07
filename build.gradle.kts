@@ -22,7 +22,7 @@ if(propertiesFile.exists()) {
 }
 
 group = "xyz.teogramm"
-version = "0.10.0"
+version = "0.9.1"
 
 repositories {
     mavenCentral()
