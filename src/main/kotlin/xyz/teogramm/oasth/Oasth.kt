@@ -33,7 +33,7 @@ import xyz.teogramm.oasth.util.OasthAPIFetcher.Companion.fetchEntriesFromEndpoin
 class Oasth(private val cachingEnabled: Boolean = true) {
 
     companion object {
-        const val API_URL = "https://oasth.gr/el/api"
+        const val API_URL = "https://old.oasth.gr/el/api"
     }
 
     private val coroutineScope = CoroutineScope(Dispatchers.IO)
